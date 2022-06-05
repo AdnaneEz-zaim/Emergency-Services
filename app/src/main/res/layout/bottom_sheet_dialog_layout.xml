@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Emergency Title"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorApp"
+        android:padding="8dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/download"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date :"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25/08/2022 08:17"
+            android:textColor="#4CAF50"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/shareLinearLayout"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danger Level :"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High"
+            android:textColor="#E91E63"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/uploadLinearLaySout"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Injured number:"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08"
+            android:textColor="#E91E63"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginBottom="3dp"
+        android:textSize="13sp"
+        android:paddingLeft="16dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2sp"
+        android:scrollbars="vertical"
+        android:textColor="#494947"
+        android:textSize="12sp"
+        android:paddingHorizontal="16dp"
+        android:text="description description description description description description descrip description description description description description description description description description description description description description description description description description description description description description description description description description "
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addUrgence"
+        android:text="add new urgence"
+        />
+</LinearLayout>

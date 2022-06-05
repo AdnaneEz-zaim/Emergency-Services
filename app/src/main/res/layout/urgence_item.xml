@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:outlineSpotShadowColor="@color/colorApp"
+        android:outlineAmbientShadowColor="@color/colorApp"
+        >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:padding="10dp"
+           >
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               >
+               <ImageButton
+                   android:layout_width="20dp"
+                   android:layout_height="20dp"
+                   android:layout_marginLeft="5dp"
+                   android:background="@drawable/danger_shape"
+                   app:backgroundTint="#4CAF50"
+                   />
+               <TextView
+                   android:paddingStart="5dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="25/05/2022 08:18"/>
+           </LinearLayout>
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="150dp"
+               android:elevation="8dp"
+               app:cardBackgroundColor="#009688"
+               android:layout_margin="5dp"
+               app:cardCornerRadius="15sp"
+               >
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:text="Maps position"
+                   android:textAlignment="center"
+                   />
+           </androidx.cardview.widget.CardView>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Emergency Title"
+               android:textSize="18sp"
+               android:textStyle="bold"
+               android:textColor="@color/colorApp"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Injured number: 05"
+               android:textSize="15dp"
+               android:textColor="@color/colorApp"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Description"
+               android:layout_marginBottom="3dp"
+               android:textSize="13sp"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:lineSpacingExtra="2sp"
+               android:scrollbars="vertical"
+               android:textColor="#494947"
+               android:textSize="12sp"
+               android:text="description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description "
+               />
+       </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/button_shape.xml" value="0.12" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/danger_shape.xml" value="0.1305" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/input_shape.xml" value="0.12" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/white_shape.xml" value="0.12" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_create_new_acompte.xml" value="0.1265625" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_details_urgence.xml" value="0.152" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_list_urgences_page.xml" value="0.1265625" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_main.xml" value="0.19844357976653695" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/add_urgence_bottom_sheet.xml" value="0.264" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.4" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/urgence_item.xml" value="0.2" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

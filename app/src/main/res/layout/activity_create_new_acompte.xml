@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateNewAcompte">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="200sp"
+                android:layout_height="200sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/img"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="80sp"
+                android:background="@drawable/white_shape"
+                android:orientation="vertical"
+                android:padding="20dp"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_prenom_log"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:layout_marginHorizontal="15sp"
+                        android:layout_marginTop="45sp"
+                        android:background="@drawable/input_shape"
+                        android:drawableLeft="@drawable/person"
+                        android:drawablePadding="10sp"
+                        android:hint="votre prenom"
+                        android:paddingHorizontal="15sp"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                         />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_nom_log"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:layout_marginHorizontal="15sp"
+                        android:layout_marginTop="45sp"
+                        android:background="@drawable/input_shape"
+                        android:drawableLeft="@drawable/person"
+                        android:drawablePadding="10sp"
+                        android:hint="votre nom"
+                        android:paddingHorizontal="15sp"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_email_log"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:layout_marginHorizontal="15sp"
+                        android:layout_marginTop="45sp"
+                        android:background="@drawable/input_shape"
+                        android:drawableLeft="@drawable/email"
+                        android:drawablePadding="10sp"
+                        android:hint="votre email"
+                        android:paddingHorizontal="15sp"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                         />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/id_pass_log"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50sp"
+                            android:layout_marginHorizontal="15sp"
+                            android:layout_marginTop="25sp"
+                            android:background="@drawable/input_shape"
+                            android:drawableLeft="@drawable/lock"
+                            android:drawablePadding="10sp"
+                            android:hint="votre mot de pass"
+                            android:paddingHorizontal="15sp"
+                            android:password="true"
+                            android:textColor="@android:color/black"
+                            app:passwordToggleEnabled="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/id_comfPass_log"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50sp"
+                            android:layout_marginHorizontal="15sp"
+                            android:layout_marginBottom="15sp"
+                            android:background="@drawable/input_shape"
+                            android:drawableLeft="@drawable/lock"
+                            android:drawablePadding="10sp"
+                            android:hint="confirmer votre mot de pass"
+                            android:paddingHorizontal="15sp"
+                            android:password="true"
+                            android:textColor="@android:color/black"
+                            app:passwordToggleEnabled="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                <Button
+                    android:id="@+id/goToHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40sp"
+                    android:layout_marginBottom="20sp"
+                    android:background="@drawable/button_shape"
+                    android:text="CREER UN COMPTE"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vous avez déja un compte ?"
+                        />
+                    <TextView
+                        android:id="@+id/dejaCreeBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10sp"
+                        android:textColor="@color/colorApp"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:text="Connectez-vous"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
