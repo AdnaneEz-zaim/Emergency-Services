@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     User user;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         login_email = findViewById(R.id.id_email_log);
         login_password = findViewById(R.id.id_pass_log);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
         auth = FirebaseAuth.getInstance();
 
         goToHome.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                     login_password.setError("Invalid Password");
                     Toast.makeText(MainActivity.this, "Your password must be at least 7 characters long", Toast.LENGTH_SHORT).show();
                 }else{
+                    goToHome.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                     auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -84,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                                 });
 
                             } else {
+                                goToHome.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(MainActivity.this, "Error in Login", Toast.LENGTH_SHORT).show();
                             }

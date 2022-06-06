@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.emergencysystem.Adapters.ListUrgencesAdapter;
+import com.example.emergencysystem.Models.Position;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
 
@@ -25,9 +26,9 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_urgences_page);
         urgenceArrayList = new ArrayList<>();
-        urgenceArrayList.add(new UrgenceModel());
-        urgenceArrayList.add(new UrgenceModel());
-        urgenceArrayList.add(new UrgenceModel());
+        urgenceArrayList.add(new UrgenceModel(1,new Position(10,19), "title 1","10/10/2010", 3, "descreption position 10 10 decreption", "", 5) );
+        urgenceArrayList.add(new UrgenceModel(1,new Position(35.759465,-5.833954),"title 2" ,"19/10/2019", 2, "descreption position 100 190 decreption", "", 10) );
+        urgenceArrayList.add(new UrgenceModel(1,new Position(200,100), "title 3","22/10/2022 09:19", 1, "descreption position 200 100 decreption", "", 15) );
 //        FirebaseAuth auth=FirebaseAuth.getInstance();
 
 //        getContactsFromFirebase(new UserListCallback() {

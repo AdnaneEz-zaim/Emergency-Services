@@ -2,29 +2,31 @@ package com.example.emergencysystem.Models;
 
 public class UrgenceModel {
     long id;
-    String position;
+    Position position;
     String date;
     int niveauxDanger;
     String description;
     String image;
+    String title;
     int nombreBlesses;
-
     public UrgenceModel() {
     }
 
-    public UrgenceModel(long id, String position, String date, int niveauxDanger, String description, int nombreBlesses) {
+    public UrgenceModel(long id, Position position,String title ,String date, int niveauxDanger, String description, int nombreBlesses) {
         this.id = id;
         this.position = position;
         this.date = date;
         this.niveauxDanger = niveauxDanger;
+        this.title = title;
         this.description = description;
         this.nombreBlesses = nombreBlesses;
     }
 
-    public UrgenceModel(long id, String position, String date, int niveauxDanger, String description, String image, int nombreBlesses) {
+    public UrgenceModel(long id, Position position, String title,String date, int niveauxDanger, String description, String image, int nombreBlesses) {
         this.id = id;
         this.position = position;
         this.date = date;
+        this.title = title;
         this.niveauxDanger = niveauxDanger;
         this.description = description;
         this.image = image;
@@ -39,12 +41,20 @@ public class UrgenceModel {
         this.id = id;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate() {

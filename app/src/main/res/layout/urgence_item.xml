@@ -33,6 +33,7 @@
                    />
                <TextView
                    android:paddingStart="5dp"
+                   android:id="@+id/dateEmergency"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="25/05/2022 08:18"/>
@@ -41,32 +42,46 @@
                android:layout_width="match_parent"
                android:layout_height="150dp"
                android:elevation="8dp"
-               app:cardBackgroundColor="#009688"
                android:layout_margin="5dp"
                app:cardCornerRadius="15sp"
                >
-               <TextView
+               <com.google.android.gms.maps.MapView
+                   android:id="@+id/mapitem"
+                   app:layout_constraintStart_toStartOf="parent"
+                   android:gravity="center"
                    android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:text="Maps position"
-                   android:textAlignment="center"
-                   />
+                   app:layout_constraintTop_toTopOf="parent"
+                   android:layout_height="150dp" />
            </androidx.cardview.widget.CardView>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Emergency Title"
+               android:id="@+id/EmergencyTitle"
                android:textSize="18sp"
                android:textStyle="bold"
                android:textColor="@color/colorApp"
                />
-           <TextView
-               android:layout_width="wrap_content"
+           <LinearLayout
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="Injured number: 05"
-               android:textSize="15dp"
-               android:textColor="@color/colorApp"
-               />
+               android:orientation="horizontal">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Injured number: "
+                   android:textSize="15dp"
+                   android:textColor="@color/colorApp"
+                   />
+               <TextView
+                   android:id="@+id/InjuredNumber"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="05"
+                   android:textSize="15dp"
+                   android:textColor="@color/colorApp"
+                   />
+           </LinearLayout>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -75,6 +90,7 @@
                android:textSize="13sp"
                />
            <TextView
+               android:id="@+id/DescriptionEmergency"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:lineSpacingExtra="2sp"
