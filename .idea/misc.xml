@@ -3,16 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/add.xml" value="0.12" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/button_shape.xml" value="0.12" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/danger_shape.xml" value="0.1305" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/email.xml" value="0.12" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/ic_launcher_background.xml" value="0.12" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/input_shape.xml" value="0.12" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/white_shape.xml" value="0.12" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_add_urgence.xml" value="0.2557894736842105" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_create_new_acompte.xml" value="0.1265625" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_details_urgence.xml" value="0.152" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_list_urgences_page.xml" value="0.1265625" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_main.xml" value="0.19844357976653695" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/add_urgence_bottom_sheet.xml" value="0.264" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.4" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/content_add_urgence.xml" value="0.1265625" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/fragment_first.xml" value="0.1265625" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/urgence_item.xml" value="0.2" />
       </map>
     </option>

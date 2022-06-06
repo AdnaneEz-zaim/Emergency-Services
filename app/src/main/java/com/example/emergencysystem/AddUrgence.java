@@ -31,15 +31,12 @@ public class AddUrgence extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityAddUrgenceBinding binding;
-    String[] courses = { "C", "Data structures",
-            "Interview prep", "Algorithms",
-            "DSA with java", "OS" };
+    String[] courses = { "Select level danger", "Low", "Medium", "High"};
     String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         binding = ActivityAddUrgenceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
