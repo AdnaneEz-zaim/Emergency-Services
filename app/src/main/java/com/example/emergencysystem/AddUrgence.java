@@ -1,8 +1,14 @@
 package com.example.emergencysystem;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import com.example.emergencysystem.Adapters.ListUrgencesAdapter;
+import com.example.emergencysystem.Adapters.ListUrgencesNormalUser;
+import com.example.emergencysystem.Models.RecycleClickListener;
+import com.example.emergencysystem.Models.UrgenceModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toolbar;
 
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
@@ -20,33 +27,47 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.emergencysystem.databinding.ActivityAddUrgenceBinding;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class AddUrgence extends AppCompatActivity {
+public class AddUrgence extends AppCompatActivity implements RecycleClickListener{
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityAddUrgenceBinding binding;
     String[] courses = { "Select level danger", "Low", "Medium", "High"};
     String currentPhotoPath;
 
+
+    RecyclerView recyclerViewUrgences;
+    ArrayList<UrgenceModel> urgenceArrayList;
+    LinearLayoutManager linearLayoutManagerUrgences;
+    ListUrgencesNormalUser urgencesAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        urgenceArrayList = new ArrayList<>();
+        urgenceArrayList.add(new UrgenceModel());
+        urgenceArrayList.add(new UrgenceModel());
+        urgenceArrayList.add(new UrgenceModel());
+
+
         binding = ActivityAddUrgenceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_add_urgence);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,8 +77,20 @@ public class AddUrgence extends AppCompatActivity {
                 showBottomSheetDialog();
             }
         });
+
+        recyclerViewUrgences = findViewById(R.id.listUrgencesClient);
+
+        linearLayoutManagerUrgences = new LinearLayoutManager(AddUrgence.this,LinearLayoutManager.VERTICAL,false);
+        urgencesAdapter = new ListUrgencesNormalUser(urgenceArrayList ,this);
+        recyclerViewUrgences.setLayoutManager(linearLayoutManagerUrgences);
+        recyclerViewUrgences.setAdapter(urgencesAdapter);
+
     }
 
+    @Override
+    public void onItemClickListener(int position) {
+        //switchToMaps(position);
+    }
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_add_urgence);
