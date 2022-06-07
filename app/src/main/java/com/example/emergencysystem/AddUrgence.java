@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.example.emergencysystem.Adapters.ListUrgencesAdapter;
 import com.example.emergencysystem.Adapters.ListUrgencesNormalUser;
+import com.example.emergencysystem.GlobalVariables.MySingleton;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,11 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.core.content.FileProvider;
@@ -47,11 +51,13 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
     private ActivityAddUrgenceBinding binding;
     String[] courses = { "Select level danger", "Low", "Medium", "High"};
     String currentPhotoPath;
-    Button savaEmergency;
+
+    EditText edtTitleEmergency,edtdescreption,edtNbrInjured;
+    Spinner spino;
 
 
     RecyclerView recyclerViewUrgences;
-    ArrayList<UrgenceModel> urgenceArrayList;
+
     LinearLayoutManager linearLayoutManagerUrgences;
     ListUrgencesNormalUser urgencesAdapter;
     Context context;
@@ -59,12 +65,6 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        urgenceArrayList = new ArrayList<>();
-        urgenceArrayList.add(new UrgenceModel());
-        urgenceArrayList.add(new UrgenceModel());
-        urgenceArrayList.add(new UrgenceModel());
-
 
         binding = ActivityAddUrgenceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -86,7 +86,7 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
         recyclerViewUrgences = findViewById(R.id.listUrgencesClient);
 
         linearLayoutManagerUrgences = new LinearLayoutManager(AddUrgence.this,LinearLayoutManager.VERTICAL,false);
-        urgencesAdapter = new ListUrgencesNormalUser(urgenceArrayList ,this);
+        urgencesAdapter = new ListUrgencesNormalUser(MySingleton.getInstance().getUrgenceArrayList(),this,getApplicationContext());
         recyclerViewUrgences.setLayoutManager(linearLayoutManagerUrgences);
         recyclerViewUrgences.setAdapter(urgencesAdapter);
 
@@ -102,34 +102,43 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-    private void showBottomSheetDialog() {
+    public void showBottomSheetDialog() {
         Button btnSelectPosition;
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.DialogStyle);
         bottomSheetDialog.setContentView(R.layout.add_urgence_bottom_sheet);
 
-        Spinner spino = bottomSheetDialog.findViewById(R.id.coursesspinner);
+        spino = bottomSheetDialog.findViewById(R.id.coursesspinner);
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item,courses);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spino.setAdapter(ad);
 
-        savaEmergency = bottomSheetDialog.findViewById(R.id.savaEmergency);
+        edtTitleEmergency = bottomSheetDialog.findViewById(R.id.edtTitleEmergency);
+        edtdescreption = bottomSheetDialog.findViewById(R.id.edtdescreption);
+        edtNbrInjured = bottomSheetDialog.findViewById(R.id.edtNbrInjured);
+
+
         btnSelectPosition = bottomSheetDialog.findViewById(R.id.btnSelectPosition);
         btnSelectPosition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent switchToArView = new Intent(AddUrgence.this, PositionUrgence.class);
-                startActivity(switchToArView);
+                String titre = edtTitleEmergency.getText().toString();
+                String description = edtdescreption.getText().toString();
+                String nbrInjured = edtNbrInjured.getText().toString();
+                String dangerLevel = spino.getSelectedItem().toString();
+                if(TextUtils.isEmpty(titre)|| TextUtils.isEmpty(nbrInjured) || TextUtils.isEmpty(description) || TextUtils.isEmpty(dangerLevel) ||spino.getSelectedItem().toString()=="Select level danger") {
+                    Toast.makeText(AddUrgence.this, "Enter valid data", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent switchToArView = new Intent(AddUrgence.this, PositionUrgence.class);
+                    switchToArView.putExtra("titre", titre);
+                    switchToArView.putExtra("description", description);
+                    switchToArView.putExtra("dangerLevel", dangerLevel);
+                    switchToArView.putExtra("nbrInjured", nbrInjured);
+                    startActivity(switchToArView);
+                }
             }
         });
-
-        savaEmergency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              // cc
-            }
-        });
-
 
         bottomSheetDialog.show();
     }

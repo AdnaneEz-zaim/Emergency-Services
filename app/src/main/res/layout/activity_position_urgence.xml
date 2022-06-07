@@ -16,9 +16,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SAVE POSITION"
+        android:text="SEND EMERGENCY"
         android:padding="12dp"
-        android:id="@+id/savePosition"
+        android:id="@+id/saveEMERGENCY"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"

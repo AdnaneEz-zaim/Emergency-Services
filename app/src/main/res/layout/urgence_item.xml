@@ -24,19 +24,41 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                >
-               <ImageButton
-                   android:layout_width="20dp"
-                   android:layout_height="20dp"
-                   android:layout_marginLeft="5dp"
-                   android:background="@drawable/danger_shape"
-                   app:backgroundTint="#4CAF50"
-                   />
+               <RelativeLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content">
+                   <ImageButton
+                       android:id="@+id/imageDangerLevel1"
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_marginLeft="5dp"
+                       android:background="@drawable/danger_shape"
+                       app:backgroundTint="#4CAF50"
+                       />
+                   <ImageButton
+                       android:id="@+id/imageDangerLevel2"
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_marginLeft="5dp"
+                       android:background="@drawable/danger_shape"
+                       app:backgroundTint="@color/orangeColor"
+                       />
+                   <ImageButton
+                       android:id="@+id/imageDangerLevel3"
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:layout_marginLeft="5dp"
+                       android:background="@drawable/danger_shape"
+                       app:backgroundTint="@color/redColor"
+                       />
+
+               </RelativeLayout>
                <TextView
                    android:paddingStart="5dp"
-                   android:id="@+id/dateEmergency"
+                   android:id="@+id/palceEmergencyName"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="25/05/2022 08:18"/>
+                   android:text="Rabat maroco haj mohamed Baraoui"/>
            </LinearLayout>
            <androidx.cardview.widget.CardView
                android:layout_width="match_parent"
@@ -62,6 +84,24 @@
                android:textStyle="bold"
                android:textColor="@color/colorApp"
                />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15dp"
+                   android:textColor="@color/colorApp"
+                   android:text="Date of declaration:"/>
+               <TextView
+                   android:paddingStart="5dp"
+                   android:id="@+id/dateEmergency"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="25/05/2022 08:18"/>
+           </LinearLayout>
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"

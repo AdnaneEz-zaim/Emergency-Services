@@ -6,13 +6,23 @@ public class UrgenceModel {
     String date;
     int niveauxDanger;
     String description;
-    String image;
+    String positionName;
     String title;
     int nombreBlesses;
     public UrgenceModel() {
     }
 
-    public UrgenceModel(long id, Position position,String title ,String date, int niveauxDanger, String description, int nombreBlesses) {
+    public UrgenceModel(Position position, String date, int niveauxDanger, String description, String positionName, String title, int nombreBlesses) {
+        this.position = position;
+        this.date = date;
+        this.niveauxDanger = niveauxDanger;
+        this.description = description;
+        this.positionName = positionName;
+        this.title = title;
+        this.nombreBlesses = nombreBlesses;
+    }
+
+    public UrgenceModel(long id, Position position, String title , String date, int niveauxDanger, String description, int nombreBlesses) {
         this.id = id;
         this.position = position;
         this.date = date;
@@ -22,14 +32,14 @@ public class UrgenceModel {
         this.nombreBlesses = nombreBlesses;
     }
 
-    public UrgenceModel(long id, Position position, String title,String date, int niveauxDanger, String description, String image, int nombreBlesses) {
+    public UrgenceModel(long id, Position position, String title,String date, int niveauxDanger, String description, String positionName, int nombreBlesses) {
         this.id = id;
         this.position = position;
         this.date = date;
         this.title = title;
         this.niveauxDanger = niveauxDanger;
         this.description = description;
-        this.image = image;
+        this.positionName = positionName;
         this.nombreBlesses = nombreBlesses;
     }
 
@@ -81,12 +91,12 @@ public class UrgenceModel {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getPositionName() {
+        return positionName;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 
     public int getNombreBlesses() {
