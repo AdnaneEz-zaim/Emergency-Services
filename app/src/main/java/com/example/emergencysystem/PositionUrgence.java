@@ -45,7 +45,7 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        mMap.setOnMapLongClickListener( this);
+       // mMap.setOnMapLongClickListener( this);
         mMap.setOnMarkerDragListener( this);
 
         // Add a marker at Taj Mahal and move the camera
@@ -65,6 +65,7 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
                 LatLng london = new LatLng(address.getLatitude(), address.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions()
                         .position(london)
+                        .draggable(true)
                         .title(address.getLocality());
                 mMap.addMarker(markerOptions);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(london, 16));
