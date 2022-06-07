@@ -131,17 +131,29 @@
                             android:textColor="@android:color/black"
                             app:passwordToggleEnabled="true" />
                     </com.google.android.material.textfield.TextInputLayout>
-                <Button
-                    android:id="@+id/singUp_btn"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="40sp"
-                    android:layout_marginBottom="20sp"
-                    android:background="@drawable/button_shape"
-                    android:text="CREER UN COMPTE"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp" />
+                    >
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="match_parent"
+                        android:indeterminateTint="@color/colorApp"
+                        android:layout_height="wrap_content" />
+                    <Button
+                        android:id="@+id/singUp_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="40sp"
+                        android:layout_marginBottom="20sp"
+                        android:background="@drawable/button_shape"
+                        android:text="CREER UN COMPTE"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

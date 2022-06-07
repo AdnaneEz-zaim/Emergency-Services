@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class CreateNewAcompte extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class CreateNewAcompte extends AppCompatActivity {
 
         auth =FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         reg_nom = findViewById(R.id.id_nom_log);
         reg_prenom = (TextInputLayout)findViewById(R.id.id_prenom_log);
@@ -65,7 +69,8 @@ public class CreateNewAcompte extends AppCompatActivity {
                 }else if(!password.equals(conPassword)){
                     Toast.makeText(CreateNewAcompte.this, "password does not match", Toast.LENGTH_SHORT).show();
                 }else{
-                    System.out.println("===> rah wsal");
+                    singUp_btn.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                     auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,11 +88,12 @@ public class CreateNewAcompte extends AppCompatActivity {
                                             Toast.makeText(CreateNewAcompte.this, task.toString(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
                             }
-                            else
+                            else {
+                                singUp_btn.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(CreateNewAcompte.this, "Error in Sing Up", Toast.LENGTH_SHORT).show();
-
+                            }
                         }
                     });
                 }

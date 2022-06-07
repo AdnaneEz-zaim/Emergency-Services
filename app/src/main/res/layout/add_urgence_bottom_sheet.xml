@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#81E4E4E4"
     android:orientation="vertical">
 
     <TextView
@@ -108,9 +109,21 @@
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 
+
+    <Button
+        android:id="@+id/btnSelectPosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorApp"
+        android:text="SELECT POSITION"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        />
+
     <Button
         android:layout_width="wrap_content"
-        android:id="@+id/camera"
+        android:id="@+id/savaEmergency"
         android:layout_height="36dp"
         android:layout_gravity="center"
         android:layout_margin="16dp"

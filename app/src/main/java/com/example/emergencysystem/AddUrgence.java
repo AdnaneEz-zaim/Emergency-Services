@@ -1,6 +1,7 @@
 package com.example.emergencysystem;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import com.example.emergencysystem.Adapters.ListUrgencesAdapter;
 import com.example.emergencysystem.Adapters.ListUrgencesNormalUser;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,12 +47,14 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
     private ActivityAddUrgenceBinding binding;
     String[] courses = { "Select level danger", "Low", "Medium", "High"};
     String currentPhotoPath;
+    Button savaEmergency;
 
 
     RecyclerView recyclerViewUrgences;
     ArrayList<UrgenceModel> urgenceArrayList;
     LinearLayoutManager linearLayoutManagerUrgences;
     ListUrgencesNormalUser urgencesAdapter;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +103,7 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
                 || super.onSupportNavigateUp();
     }
     private void showBottomSheetDialog() {
+        Button btnSelectPosition;
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.DialogStyle);
         bottomSheetDialog.setContentView(R.layout.add_urgence_bottom_sheet);
@@ -107,29 +113,20 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spino.setAdapter(ad);
 
-        Button cameraButton = bottomSheetDialog.findViewById(R.id.camera);
-
-        cameraButton.setOnClickListener(new View.OnClickListener() {
+        savaEmergency = bottomSheetDialog.findViewById(R.id.savaEmergency);
+        btnSelectPosition = bottomSheetDialog.findViewById(R.id.btnSelectPosition);
+        btnSelectPosition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-                    }
-                    // Continue only if the File was successfully created
-                    if (photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(AddUrgence.this, "com.example.android.fileprovider",
-                                photoFile);
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        startActivityForResult(takePictureIntent, 2);
-                    }
-                }
+                Intent switchToArView = new Intent(AddUrgence.this, PositionUrgence.class);
+                startActivity(switchToArView);
+            }
+        });
+
+        savaEmergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              // cc
             }
         });
 
@@ -154,3 +151,23 @@ public class AddUrgence extends AppCompatActivity implements RecycleClickListene
     }
 
 }
+
+
+//    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//// Ensure that there's a camera activity to handle the intent
+//                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//                        // Create the File where the photo should go
+//                        File photoFile = null;
+//                        try {
+//                        photoFile = createImageFile();
+//                        } catch (IOException ex) {
+//                        // Error occurred while creating the File
+//                        }
+//                        // Continue only if the File was successfully created
+//                        if (photoFile != null) {
+//                        Uri photoURI = FileProvider.getUriForFile(AddUrgence.this, "com.example.android.fileprovider",
+//                        photoFile);
+//                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+//                        startActivityForResult(takePictureIntent, 2);
+//                        }
+//                        }

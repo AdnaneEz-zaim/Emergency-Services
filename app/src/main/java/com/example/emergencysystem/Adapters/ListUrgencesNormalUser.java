@@ -12,6 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
 import com.example.emergencysystem.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -49,6 +55,17 @@ public class ListUrgencesNormalUser extends RecyclerView.Adapter<ListUrgencesNor
             super(itemView);
             // productName = itemView.findViewById(R.id.chatProductName);
             //productImage = itemView.findViewById(R.id.chatImageProduct);
+            MapView mapView = (MapView)itemView.findViewById(R.id.mapitem);
+            mapView.onCreate(null);
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    LatLng sydney = new LatLng(-10, 78);
+                    googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15f));
+                    mapView.onResume();
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
