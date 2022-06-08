@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_margin="20dp"
+    android:background="@drawable/shape_dialog"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:textSize="24dp"
+        android:gravity="center"
+        android:textColor="@color/colorApp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="are you sure want\n Log Out ?"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="#656363"
+        android:textSize="15dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp">
+        <TextView
+            android:id="@+id/dialog_No"
+            android:layout_weight="1"
+            android:text="No"
+            android:gravity="center"
+            android:background="@drawable/no_shape"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorApp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <TextView
+            android:id="@+id/dialog_Yes"
+            android:layout_weight="1"
+            android:text="Yes"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:background="@drawable/discount_shape"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,48 +1,58 @@
 package com.example.emergencysystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.emergencysystem.Adapters.ListUrgencesAdapter;
+import com.example.emergencysystem.GlobalVariables.MySingleton;
 import com.example.emergencysystem.Models.Position;
 import com.example.emergencysystem.Models.RecycleClickListener;
+import com.example.emergencysystem.Models.Role;
 import com.example.emergencysystem.Models.UrgenceModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ListUrgencesPage extends AppCompatActivity implements RecycleClickListener {
 
     RecyclerView recyclerViewUrgences;
-    ArrayList<UrgenceModel> urgenceArrayList;
     LinearLayoutManager linearLayoutManagerUrgences;
     ListUrgencesAdapter urgencesAdapter;
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_urgences_page);
-        urgenceArrayList = new ArrayList<>();
-        urgenceArrayList.add(new UrgenceModel(1,new Position(10,19), "title 1","10/10/2010", 3, "descreption position 10 10 decreption", "", 5) );
-        urgenceArrayList.add(new UrgenceModel(1,new Position(35.759465,-5.833954),"title 2" ,"19/10/2019", 2, "descreption position 100 190 decreption", "", 10) );
-        urgenceArrayList.add(new UrgenceModel(1,new Position(200,100), "title 3","22/10/2022 09:19", 1, "descreption position 200 100 decreption", "", 15) );
-//        FirebaseAuth auth=FirebaseAuth.getInstance();
+        database= FirebaseDatabase.getInstance();
 
-//        getContactsFromFirebase(new UserListCallback() {
-//            @Override
-//            public void onCallback(ArrayList<ProductChatModel> users) {
-//                System.out.println("Loaded "+users.size()+" contacts");
-//            }
-//        },auth);
+
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+
+        getContactsFromFirebase(new UserListCallback() {
+            @Override
+            public void onCallback(ArrayList<UrgenceModel> urgences) {
+                System.out.println("Loaded "+urgences.size()+" contacts");
+            }
+        },auth);
 
         //list product traitmant
         recyclerViewUrgences = findViewById(R.id.listUrgences);
 
         linearLayoutManagerUrgences = new LinearLayoutManager(ListUrgencesPage.this,LinearLayoutManager.VERTICAL,false);
-        urgencesAdapter = new ListUrgencesAdapter(urgenceArrayList ,this);
+        urgencesAdapter = new ListUrgencesAdapter(MySingleton.getInstance().getUrgenceArrayList(),this);
         recyclerViewUrgences.setLayoutManager(linearLayoutManagerUrgences);
         recyclerViewUrgences.setAdapter(urgencesAdapter);
     }
@@ -55,13 +65,28 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
 
     private void switchToMaps(int position) {
             Intent switchActivityIntent = new Intent(this, DetailsUrgence.class);
-//            switchActivityIntent.putExtra("name",productArrayList.get(position).getName());
-//            switchActivityIntent.putExtra("image",productArrayList.get(position).getImage());
-//            switchActivityIntent.putExtra("id",productArrayList.get(position).getId() );
             startActivity(switchActivityIntent);
     }
     public interface UserListCallback {
-        void onCallback(ArrayList<UrgenceModel> messagesArrayList);
+        void onCallback(ArrayList<UrgenceModel> urgencesArrayList);
+    }
+
+    public void getContactsFromFirebase(final UserListCallback myCallback, FirebaseAuth auth) {
+        database.getReference().child("emergency").orderByChild("role").equalTo("Admin").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                MySingleton.getInstance().clearListUrgences();
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    UrgenceModel urgence = dataSnapshot.getValue(UrgenceModel.class);
+                    MySingleton.getInstance().addUrgence(urgence);
+                }
+                myCallback.onCallback(MySingleton.getInstance().getUrgenceArrayList());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
 

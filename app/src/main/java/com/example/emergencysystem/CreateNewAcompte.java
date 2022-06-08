@@ -82,7 +82,7 @@ public class CreateNewAcompte extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){
                                             Toast.makeText(CreateNewAcompte.this, "User created successfully", Toast.LENGTH_SHORT).show();
-                                            Intent switchActivityIntent = new Intent(CreateNewAcompte.this, AddUrgence.class);
+                                            Intent switchActivityIntent = new Intent(CreateNewAcompte.this, UserListUrgencesActivity.class);
                                             startActivity(switchActivityIntent);
                                         }else
                                             Toast.makeText(CreateNewAcompte.this, task.toString(), Toast.LENGTH_SHORT).show();

@@ -118,7 +118,7 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
                             new UrgenceModel(position, formatter.format(date).toString(), danger, description, title, titreEmergency, Integer.parseInt(nbrInjured))
                     );
                     Intent switchToArView;
-                    switchToArView = new Intent(PositionUrgence.this, AddUrgence.class);
+                    switchToArView = new Intent(PositionUrgence.this, UserListUrgencesActivity.class);
                     startActivity(switchToArView);
                     Toast.makeText(PositionUrgence.this, title+" "+position.getX()+"", Toast.LENGTH_SHORT).show();
                 }

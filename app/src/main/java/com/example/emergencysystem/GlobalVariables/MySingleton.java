@@ -15,6 +15,10 @@ public class MySingleton {
         this.urgenceArrayList = urgenceArrayList;
     }
 
+    public void clearListUrgences(){
+        this.urgenceArrayList.clear();
+    }
+
     public void addUrgence(UrgenceModel urgence){
         this.urgenceArrayList.add(urgence);
     }

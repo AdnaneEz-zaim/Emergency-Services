@@ -78,7 +78,7 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
         addUrgence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent switchActivityIntent = new Intent(DetailsUrgence.this, AddUrgence.class);
+                Intent switchActivityIntent = new Intent(DetailsUrgence.this, UserListUrgencesActivity.class);
                 startActivity(switchActivityIntent);
             }
         });
