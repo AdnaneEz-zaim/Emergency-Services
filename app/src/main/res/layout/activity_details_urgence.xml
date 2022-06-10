@@ -4,19 +4,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailsUrgence" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DetailsUrgence" />
+
     <Button
+        android:id="@+id/bottomDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="buttomShet"
-        android:id="@+id/bottomDialog"
-        android:layout_margin="10dp"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-3dp"
+        android:background="@drawable/rounded_dialog"
+        android:backgroundTint="@color/colorApp"
+        android:padding="15dp"
+        android:text="Details emergency" />
 </RelativeLayout>

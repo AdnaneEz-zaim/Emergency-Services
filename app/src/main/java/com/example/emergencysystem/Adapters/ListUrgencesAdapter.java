@@ -3,6 +3,7 @@ package com.example.emergencysystem.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,15 +41,29 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull HolderUrgences holder, int position) {
-        //holder.productName.setText(data.get(position).getPrenom()+" "+data.get(position).getNom());
-        //Picasso.get().load(data.get(position).getImage()).into(holder.productImage);
         holder.dateEmergency.setText(data.get(position).getDate());
         holder.DescriptionEmergency.setText(data.get(position).getDescription());
         holder.EmergencyTitle.setText(data.get(position).getTitle());
+        holder.palceEmergencyName.setText(data.get(position).getPositionName());
         holder.InjuredNumber.setText(data.get(position).getNombreBlesses()+"");
-        holder.position.setX(data.get(position).getPosition().getX());
-        holder.position.setY(data.get(position).getPosition().getY());
 
+        if(data.get(position).getNiveauxDanger()==3) {
+            //holder.imageDangerLevel.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.redColor)));
+            holder.imageDangerLevel1.setVisibility(View.INVISIBLE);
+            holder.imageDangerLevel2.setVisibility(View.INVISIBLE);
+            holder.imageDangerLevel3.setVisibility(View.VISIBLE);
+        }
+        else if(data.get(position).getNiveauxDanger()==2){
+            holder.imageDangerLevel1.setVisibility(View.INVISIBLE);
+            holder.imageDangerLevel2.setVisibility(View.VISIBLE);
+            holder.imageDangerLevel3.setVisibility(View.INVISIBLE);
+        }else{
+            holder.imageDangerLevel1.setVisibility(View.VISIBLE);
+            holder.imageDangerLevel2.setVisibility(View.INVISIBLE);
+            holder.imageDangerLevel3.setVisibility(View.INVISIBLE);
+        }
+        holder.position.setPositionX(data.get(position).getPosition().getPositionX());
+        holder.position.setPositionY(data.get(position).getPosition().getPositionY());
     }
 
     @Override
@@ -57,8 +72,9 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
     }
 
     public class HolderUrgences extends RecyclerView.ViewHolder {
-        TextView EmergencyTitle,InjuredNumber,DescriptionEmergency,dateEmergency;
+        TextView EmergencyTitle,InjuredNumber,DescriptionEmergency,dateEmergency,palceEmergencyName;
         Position position;
+        ImageButton imageDangerLevel1,imageDangerLevel2,imageDangerLevel3;
         public HolderUrgences(@NonNull View itemView) {
             super(itemView);
             // productName = itemView.findViewById(R.id.chatProductName);
@@ -68,6 +84,10 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
             DescriptionEmergency = itemView.findViewById(R.id.DescriptionEmergency);
             InjuredNumber = itemView.findViewById(R.id.InjuredNumber);
             EmergencyTitle = itemView.findViewById(R.id.EmergencyTitle);
+            palceEmergencyName = itemView.findViewById(R.id.palceEmergencyName);
+            imageDangerLevel1 = itemView.findViewById(R.id.imageDangerLevel1);
+            imageDangerLevel2 = itemView.findViewById(R.id.imageDangerLevel2);
+            imageDangerLevel3 = itemView.findViewById(R.id.imageDangerLevel3);
 
 
             MapView mapView = (MapView)itemView.findViewById(R.id.mapitem);
@@ -75,7 +95,7 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap googleMap) {
-                    LatLng sydney = new LatLng(position.getX(), position.getY());
+                    LatLng sydney = new LatLng(position.getPositionX(), position.getPositionY());
                     googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15f));
                     mapView.onResume();

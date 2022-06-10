@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.emergencysystem.GlobalVariables.MySingleton;
 import com.example.emergencysystem.Models.Position;
 import com.example.emergencysystem.Models.UrgenceModel;
+import com.example.emergencysystem.VolleyUtils.VolleyUtils;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,7 +41,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PositionUrgence extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener, GoogleMap.OnMarkerDragListener {
     private GoogleMap mMap;
@@ -112,19 +115,29 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
                         danger=2;
                     else if(dangerLevel.equals("High"))
                         danger=3;
-                    System.out.println("==================>"+dangerLevel+danger);
-                    MySingleton.getInstance().addUrgence(
-                            //title ===> position title
-                            new UrgenceModel(position, formatter.format(date).toString(), danger, description, title, titreEmergency, Integer.parseInt(nbrInjured))
-                    );
+                    //title ===> position title
+                    String d = formatter.format(date).toString();
+                    UrgenceModel urgence = new UrgenceModel(position, d, danger, description, title, titreEmergency, Integer.parseInt(nbrInjured));
+                    MySingleton.getInstance().addUrgence(urgence);
+                    Map<String, Object> map = new HashMap<>();
+                    Map<String, Object> map1 = new HashMap<>();
+                    map1.put("positionX", urgence.getPosition().getPositionX());
+                    map1.put("positionY", urgence.getPosition().getPositionY());
+                    map.put("position", map1);
+                    map.put("date",urgence.getDate());
+                    map.put("niveauxDanger",urgence.getNiveauxDanger());
+                    map.put("description",urgence.getDescription());
+                    map.put("positionName",urgence.getPositionName());
+                    map.put("title",urgence.getTitle());
+                    map.put("nombreBlesses",urgence.getNombreBlesses());
+
+                    VolleyUtils.SendData( map, getApplicationContext());
                     Intent switchToArView;
                     switchToArView = new Intent(PositionUrgence.this, UserListUrgencesActivity.class);
                     startActivity(switchToArView);
-                    Toast.makeText(PositionUrgence.this, title+" "+position.getX()+"", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -183,8 +196,8 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG, "onMapLongClick: " + latLng.toString());
         try {
              addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            position.setX(latLng.latitude);
-            position.setY(latLng.longitude);
+            position.setPositionX(latLng.latitude);
+            position.setPositionY(latLng.longitude);
             if (addresses.size() > 0) {
                 address = addresses.get(0);
                 String streetAddress = address.getAddressLine(0);
@@ -215,8 +228,8 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
         LatLng latLng = marker.getPosition();
         try {
              addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            position.setX(latLng.latitude);
-            position.setY(latLng.longitude);
+            position.setPositionX(latLng.latitude);
+            position.setPositionY(latLng.longitude);
             if (addresses.size() > 0) {
                  address = addresses.get(0);
                 String streetAddress = address.getAddressLine(0);
@@ -250,8 +263,8 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
-            position.setX(latLng.latitude);
-            position.setY(latLng.longitude);
+            position.setPositionX(latLng.latitude);
+            position.setPositionY(latLng.longitude);
             title = markerOptions.getTitle();
 
         }
@@ -275,8 +288,8 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
                 }
                 if (location != null) {
                     drawMarker(location, "i am here");
-                    position.setX(location.getLatitude());
-                    position.setY(location.getLongitude());
+                    position.setPositionX(location.getLatitude());
+                    position.setPositionY(location.getLongitude());
                     try {
                         addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                         title = addresses.get(0).getAddressLine(0);

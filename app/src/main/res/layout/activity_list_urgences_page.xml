@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,5 +11,19 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       />
+  <ImageView
+      android:id="@+id/emptyDataAdmin"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:src="@drawable/empty_"
+      />
+  <ProgressBar
+      android:id="@+id/progressBarDataAdmin"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="match_parent"
+      android:layout_marginTop="35sp"
+      android:layout_centerVertical="true"
+      android:indeterminateTint="@color/colorApp"
+      android:layout_height="wrap_content" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  </RelativeLayout>

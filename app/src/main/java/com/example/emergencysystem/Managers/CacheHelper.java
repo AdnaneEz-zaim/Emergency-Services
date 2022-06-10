@@ -69,8 +69,14 @@ public class CacheHelper extends SQLiteOpenHelper {
             if(cursor.getString(3).equals(Role.user.toString())) {
                 user.setRole(Role.user);
             }
-            else {
-                user.setRole(Role.Admin);
+            else if(cursor.getString(3).equals(Role.Police.toString())) {
+                user.setRole(Role.Police);
+            }
+            else if(cursor.getString(3).equals(Role.EMS.toString())) {
+                user.setRole(Role.EMS);
+            }
+            else{
+                user.setRole(Role.Fireman);
             }
             return user;
         }
@@ -90,8 +96,15 @@ public class CacheHelper extends SQLiteOpenHelper {
                 user.setPrenom(cursor.getString(1));
                 if(cursor.getString(3).equals(Role.user.toString()))
                     user.setRole(Role.user);
-                else
-                    user.setRole(Role.Admin);
+                else if(cursor.getString(3).equals(Role.Police.toString())) {
+                    user.setRole(Role.Police);
+                }
+                else if(cursor.getString(3).equals(Role.EMS.toString())) {
+                    user.setRole(Role.EMS);
+                }
+                else{
+                    user.setRole(Role.Fireman);
+                }
                 users.add(user);
             }while(cursor.moveToNext());
 

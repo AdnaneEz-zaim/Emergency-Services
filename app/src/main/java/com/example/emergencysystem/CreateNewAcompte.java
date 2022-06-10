@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.emergencysystem.Managers.CacheHelper;
 import com.example.emergencysystem.Models.Role;
 import com.example.emergencysystem.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,10 +32,15 @@ public class CreateNewAcompte extends AppCompatActivity {
     FirebaseDatabase database;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressBar progressBar;
+
+    CacheHelper sqlLiteCacheHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_acompte);
+
+        //initalisation de notre cacheHelper
+        sqlLiteCacheHelper = new CacheHelper(this);
 
         auth =FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -83,6 +89,7 @@ public class CreateNewAcompte extends AppCompatActivity {
                                         if (task.isSuccessful()){
                                             Toast.makeText(CreateNewAcompte.this, "User created successfully", Toast.LENGTH_SHORT).show();
                                             Intent switchActivityIntent = new Intent(CreateNewAcompte.this, UserListUrgencesActivity.class);
+                                            sqlLiteCacheHelper.addUser(user,user.getRole().toString());
                                             startActivity(switchActivityIntent);
                                         }else
                                             Toast.makeText(CreateNewAcompte.this, task.toString(), Toast.LENGTH_SHORT).show();

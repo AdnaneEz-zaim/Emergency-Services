@@ -1,26 +1,44 @@
 package com.example.emergencysystem.Models;
 
 public class Position {
-    double x,y;
+    double positionY,positionX;
+    String id;
 
-    public Position(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public Position() {
     }
 
-    public double getX() {
-        return x;
+    public Position(double positionX, double positionY) {
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public Position(double positionY, double positionX, String id) {
+        this.positionY = positionY;
+        this.positionX = positionX;
+        this.id = id;
     }
 
-    public double getY() {
-        return y;
+    public double getPositionY() {
+        return positionY;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setPositionY(double positionY) {
+        this.positionY = positionY;
+    }
+
+    public double getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(double positionX) {
+        this.positionX = positionX;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

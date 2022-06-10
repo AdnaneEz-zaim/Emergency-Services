@@ -2,13 +2,20 @@ package com.example.emergencysystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.emergencysystem.Managers.CacheHelper;
 import com.example.emergencysystem.Models.Role;
 import com.example.emergencysystem.Models.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreenActivity extends AppCompatActivity {
     CacheHelper sqlLiteCacheHelper;
@@ -24,11 +31,11 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (cacheUser != null) {
+
                     if (cacheUser.getRole().equals(Role.user))
                         switchToArView = new Intent(SplashScreenActivity.this, UserListUrgencesActivity.class);
                     else
                         switchToArView = new Intent(SplashScreenActivity.this, ListUrgencesPage.class);
-
                 } else {
                     switchToArView = new Intent(SplashScreenActivity.this, MainActivity.class);
                 }

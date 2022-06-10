@@ -1,20 +1,13 @@
 package com.example.emergencysystem.Adapters;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.emergencysystem.Models.Position;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
@@ -70,8 +63,9 @@ public class ListUrgencesNormalUser extends RecyclerView.Adapter<ListUrgencesNor
             holder.imageDangerLevel2.setVisibility(View.INVISIBLE);
             holder.imageDangerLevel3.setVisibility(View.INVISIBLE);
         }
-        holder.position.setX(data.get(position).getPosition().getX());
-        holder.position.setY(data.get(position).getPosition().getY());
+        System.out.println("===> ha la positioon li jab "+data.get(position).getPosition().getPositionX());
+        holder.position.setPositionX(data.get(position).getPosition().getPositionX());
+        holder.position.setPositionY(data.get(position).getPosition().getPositionY());
     }
 
     @Override
@@ -103,7 +97,7 @@ public class ListUrgencesNormalUser extends RecyclerView.Adapter<ListUrgencesNor
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap googleMap) {
-                    LatLng sydney = new LatLng(position.getX(), position.getY());
+                    LatLng sydney = new LatLng(position.getPositionX(), position.getPositionY());
                     googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15f));
                     mapView.onResume();

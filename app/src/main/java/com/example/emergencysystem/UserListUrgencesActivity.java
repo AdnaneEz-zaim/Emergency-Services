@@ -25,9 +25,16 @@ import com.example.emergencysystem.Adapters.ListUrgencesNormalUser;
 import com.example.emergencysystem.GlobalVariables.MySingleton;
 import com.example.emergencysystem.Managers.CacheHelper;
 import com.example.emergencysystem.Models.RecycleClickListener;
+import com.example.emergencysystem.Models.UrgenceModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class UserListUrgencesActivity extends AppCompatActivity implements RecycleClickListener {
     String[] courses = { "Select level danger", "Low", "Medium", "High"};
@@ -40,12 +47,23 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
     LinearLayoutManager linearLayoutManagerUrgences;
     ListUrgencesNormalUser urgencesAdapter;
     CacheHelper sqlLiteCacheHelper;
+    FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list_urgences);
 
+        database= FirebaseDatabase.getInstance();
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+
         sqlLiteCacheHelper = new CacheHelper(this);
+        getContactsFromFirebase(new UrgenceListCallback() {
+            @Override
+            public void onCallback(ArrayList<UrgenceModel> urgences) {
+                System.out.println("Loaded "+urgences.size()+" contacts");
+            }
+        },auth);
+
         emptyData = findViewById(R.id.emptyData);
         if(MySingleton.getInstance().getUrgenceArrayList().size()!=0)
             emptyData.setVisibility(View.INVISIBLE);
@@ -76,8 +94,6 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
         menuInflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
@@ -154,5 +170,28 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
         });
 
         bottomSheetDialog.show();
+    }
+
+    private interface UrgenceListCallback {
+        void onCallback(ArrayList<UrgenceModel> urgencesArrayList);
+    }
+    public void getContactsFromFirebase(final UrgenceListCallback myCallback, FirebaseAuth auth) {
+        database.getReference().child("data").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                MySingleton.getInstance().clearListUrgences();
+                System.out.println("#####++++++++++++++++++++++++++++++########\n");
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+//                    UrgenceModel urgence = dataSnapshot.getValue(UrgenceModel.class);
+//                    MySingleton.getInstance().addUrgence(urgence);
+                    System.out.println(dataSnapshot);
+                }
+                myCallback.onCallback(MySingleton.getInstance().getUrgenceArrayList());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

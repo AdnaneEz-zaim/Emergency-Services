@@ -8,12 +8,28 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@color/colorApp</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
     <style name="Dialoge">
         <item name="android:windowBackground">@drawable/empty_bac</item>
         <item name="windowNoTitle">true</item>
         <item name="windowMinWidthMajor">80%</item>
         <item name="windowActionBar">false</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="Theme.BottomSheetDialog" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 </resources>
 

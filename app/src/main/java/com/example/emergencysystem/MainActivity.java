@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     CacheHelper sqlLiteCacheHelper;
-
-    User cacheUser;
     Intent switchToArView;
 
     @Override
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             user = dataSnapshot.getValue(User.class);
 
-                                            if (user.getRole() == Role.Admin)
+                                            if (user.getRole() != Role.user)
                                                 switchToArView = new Intent(MainActivity.this, ListUrgencesPage.class);
                                             else
                                                 switchToArView = new Intent(MainActivity.this, UserListUrgencesActivity.class);

@@ -49,6 +49,6 @@ dependencies {
 //    BottomSheet implementation
     implementation 'com.google.android.material:material:1.6.0'
 //   google maps
-
+    implementation 'com.github.jd-alexander:library:1.1.0'
 
 }

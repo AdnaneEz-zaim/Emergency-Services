@@ -14,6 +14,7 @@
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/input_shape.xml" value="0.12" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/no_shape.xml" value="0.1235" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/person.xml" value="0.1" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/rounded_dialog.xml" value="0.1235" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/shape_dialog.xml" value="0.137" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/splash_background.xml" value="0.1065" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/drawable/white_shape.xml" value="0.12" />
@@ -27,12 +28,14 @@
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_splash_screen.xml" value="0.1265625" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/activity_user_list_urgences.xml" value="0.10948905109489052" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/add_urgence_bottom_sheet.xml" value="0.264" />
-        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.4" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.536" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/content_add_urgence.xml" value="0.1265625" />
-        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/dialog_layout.xml" value="0.72" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/dialog_layout.xml" value="0.48074179743223966" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/dialog_no_internet.xml" value="0.24139492753623187" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/fragment_first.xml" value="0.1265625" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/layout/urgence_item.xml" value="0.29557522123893804" />
         <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/menu/menu.xml" value="0.16799999999999998" />
+        <entry key="..\:/ENSIAS S4/EmergencySystem/app/src/main/res/xml/network_security_config.xml" value="0.1125" />
       </map>
     </option>
   </component>
