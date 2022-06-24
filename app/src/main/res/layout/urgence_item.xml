@@ -3,142 +3,169 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:padding="0dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="15dp"
         android:outlineSpotShadowColor="@color/colorApp"
         android:outlineAmbientShadowColor="@color/colorApp"
         >
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           android:padding="10dp"
-           >
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               >
-               <RelativeLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content">
-                   <ImageButton
-                       android:id="@+id/imageDangerLevel1"
-                       android:layout_width="20dp"
-                       android:layout_height="20dp"
-                       android:layout_marginLeft="5dp"
-                       android:background="@drawable/danger_shape"
-                       app:backgroundTint="#4CAF50"
-                       />
-                   <ImageButton
-                       android:id="@+id/imageDangerLevel2"
-                       android:layout_width="20dp"
-                       android:layout_height="20dp"
-                       android:layout_marginLeft="5dp"
-                       android:background="@drawable/danger_shape"
-                       app:backgroundTint="@color/orangeColor"
-                       />
-                   <ImageButton
-                       android:id="@+id/imageDangerLevel3"
-                       android:layout_width="20dp"
-                       android:layout_height="20dp"
-                       android:layout_marginLeft="5dp"
-                       android:background="@drawable/danger_shape"
-                       app:backgroundTint="@color/redColor"
-                       />
 
-               </RelativeLayout>
-               <TextView
-                   android:paddingStart="5dp"
-                   android:id="@+id/palceEmergencyName"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Rabat maroco haj mohamed Baraoui"/>
-           </LinearLayout>
-           <androidx.cardview.widget.CardView
-               android:layout_width="match_parent"
-               android:layout_height="150dp"
-               android:elevation="8dp"
-               android:layout_margin="5dp"
-               app:cardCornerRadius="15sp"
-               >
-               <com.google.android.gms.maps.MapView
-                   android:id="@+id/mapitem"
-                   app:layout_constraintStart_toStartOf="parent"
-                   android:gravity="center"
-                   android:layout_width="match_parent"
-                   app:layout_constraintTop_toTopOf="parent"
-                   android:layout_height="150dp" />
-           </androidx.cardview.widget.CardView>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Emergency Title"
-               android:id="@+id/EmergencyTitle"
-               android:textSize="18sp"
-               android:textStyle="bold"
-               android:textColor="@color/colorApp"
-               />
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               >
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="15dp"
-                   android:textColor="@color/colorApp"
-                   android:text="Date of declaration:"/>
-               <TextView
-                   android:paddingStart="5dp"
-                   android:id="@+id/dateEmergency"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="25/05/2022 08:18"/>
-           </LinearLayout>
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal">
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Injured number: "
-                   android:textSize="15dp"
-                   android:textColor="@color/colorApp"
-                   />
-               <TextView
-                   android:id="@+id/InjuredNumber"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="05"
-                   android:textSize="15dp"
-                   android:textColor="@color/colorApp"
-                   />
-           </LinearLayout>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Description"
-               android:layout_marginBottom="3dp"
-               android:textSize="13sp"
-               />
-           <TextView
-               android:id="@+id/DescriptionEmergency"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:lineSpacingExtra="2sp"
-               android:scrollbars="vertical"
-               android:textColor="#494947"
-               android:textSize="12sp"
-               android:text="description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description "
-               />
-       </LinearLayout>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#7A00FF00"
+            android:textColor="@color/black"
+            android:text="Status"
+            android:textAlignment="center" />
+        <TextView
+            android:id="@+id/status2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#EDF80303"
+            android:textColor="@color/black"
+            android:text="Status"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/imageDangerLevel1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/danger_shape"
+                        app:backgroundTint="#4CAF50" />
+
+                    <ImageButton
+                        android:id="@+id/imageDangerLevel2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/danger_shape"
+                        app:backgroundTint="@color/orangeColor" />
+
+                    <ImageButton
+                        android:id="@+id/imageDangerLevel3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/danger_shape"
+                        app:backgroundTint="@color/redColor" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/palceEmergencyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:text="Rabat maroco haj mohamed Baraoui" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="15sp">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapitem"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/EmergencyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emergency Title"
+                android:textColor="@color/colorApp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date of declaration:"
+                    android:textColor="@color/colorApp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/dateEmergency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:text="25/05/2022 08:18" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Injured number: "
+                    android:textColor="@color/colorApp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/InjuredNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05"
+                    android:textColor="@color/colorApp"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="Description"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/DescriptionEmergency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2sp"
+                android:scrollbars="vertical"
+                android:text="description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description "
+                android:textColor="#494947"
+                android:textSize="12sp" />
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

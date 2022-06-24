@@ -1,7 +1,7 @@
 package com.example.emergencysystem.Models;
 
 public class UrgenceModel {
-    long id;
+    String id;
     Position position;
     String date;
     int niveauxDanger;
@@ -9,10 +9,14 @@ public class UrgenceModel {
     String positionName;
     String title;
     int nombreBlesses;
+    String takeBy;
+    String status;
+    String device;
+
     public UrgenceModel() {
     }
 
-    public UrgenceModel(Position position, String date, int niveauxDanger, String description, String positionName, String title, int nombreBlesses) {
+    public UrgenceModel(Position position, String date, int niveauxDanger, String description, String positionName, String title, int nombreBlesses,String takeBy,String status,String device) {
         this.position = position;
         this.date = date;
         this.niveauxDanger = niveauxDanger;
@@ -20,34 +24,38 @@ public class UrgenceModel {
         this.positionName = positionName;
         this.title = title;
         this.nombreBlesses = nombreBlesses;
+        this.status = status;
+        this.takeBy = takeBy;
+        this.device = device;
     }
 
-    public UrgenceModel(long id, Position position, String title , String date, int niveauxDanger, String description, int nombreBlesses) {
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public UrgenceModel(String id, Position position, String date, int niveauxDanger, String description, String positionName, String title, int nombreBlesses,String takeBy,String status,String device) {
         this.id = id;
         this.position = position;
         this.date = date;
-        this.niveauxDanger = niveauxDanger;
-        this.title = title;
-        this.description = description;
-        this.nombreBlesses = nombreBlesses;
-    }
-
-    public UrgenceModel(long id, Position position, String title,String date, int niveauxDanger, String description, String positionName, int nombreBlesses) {
-        this.id = id;
-        this.position = position;
-        this.date = date;
-        this.title = title;
         this.niveauxDanger = niveauxDanger;
         this.description = description;
         this.positionName = positionName;
+        this.title = title;
         this.nombreBlesses = nombreBlesses;
+        this.takeBy = takeBy;
+        this.status = status;
+        this.device = device;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,6 +65,22 @@ public class UrgenceModel {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public String getTakeBy() {
+        return takeBy;
+    }
+
+    public void setTakeBy(String takeBy) {
+        this.takeBy = takeBy;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTitle() {

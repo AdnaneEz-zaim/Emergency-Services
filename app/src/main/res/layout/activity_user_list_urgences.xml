@@ -18,6 +18,14 @@
         android:layout_height="match_parent"
         android:src="@drawable/empty_"
         />
+    <ProgressBar
+        android:id="@+id/progressBarDataUser"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="35sp"
+        android:layout_centerVertical="true"
+        android:indeterminateTint="@color/colorApp"
+        android:layout_height="wrap_content" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

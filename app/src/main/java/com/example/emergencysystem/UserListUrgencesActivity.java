@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.example.emergencysystem.Adapters.ListUrgencesNormalUser;
 import com.example.emergencysystem.GlobalVariables.MySingleton;
 import com.example.emergencysystem.Managers.CacheHelper;
+import com.example.emergencysystem.Models.EmergencyFirebaseModel;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -48,6 +50,7 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
     ListUrgencesNormalUser urgencesAdapter;
     CacheHelper sqlLiteCacheHelper;
     FirebaseDatabase database;
+    ProgressBar progressBarDataUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,18 +58,22 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
 
         database= FirebaseDatabase.getInstance();
         FirebaseAuth auth=FirebaseAuth.getInstance();
+        emptyData = findViewById(R.id.emptyData);
+        emptyData.setVisibility(View.INVISIBLE);
+        progressBarDataUser = findViewById(R.id.progressBarDataUser);
 
         sqlLiteCacheHelper = new CacheHelper(this);
         getContactsFromFirebase(new UrgenceListCallback() {
             @Override
             public void onCallback(ArrayList<UrgenceModel> urgences) {
                 System.out.println("Loaded "+urgences.size()+" contacts");
+                if(urgences.size()!=0)
+                    emptyData.setVisibility(View.INVISIBLE);
+                else
+                    emptyData.setVisibility(View.VISIBLE);
+                urgencesAdapter.notifyDataSetChanged();
             }
         },auth);
-
-        emptyData = findViewById(R.id.emptyData);
-        if(MySingleton.getInstance().getUrgenceArrayList().size()!=0)
-            emptyData.setVisibility(View.INVISIBLE);
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +171,7 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
                     switchToArView.putExtra("description", description);
                     switchToArView.putExtra("dangerLevel", dangerLevel);
                     switchToArView.putExtra("nbrInjured", nbrInjured);
+                    switchToArView.putExtra("createBy", sqlLiteCacheHelper.getUser().getId());
                     startActivity(switchToArView);
                 }
             }
@@ -176,16 +184,24 @@ public class UserListUrgencesActivity extends AppCompatActivity implements Recyc
         void onCallback(ArrayList<UrgenceModel> urgencesArrayList);
     }
     public void getContactsFromFirebase(final UrgenceListCallback myCallback, FirebaseAuth auth) {
-        database.getReference().child("data").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("data")
+                .orderByChild("createBy").equalTo(sqlLiteCacheHelper.getUser().getId())
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 MySingleton.getInstance().clearListUrgences();
                 System.out.println("#####++++++++++++++++++++++++++++++########\n");
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-//                    UrgenceModel urgence = dataSnapshot.getValue(UrgenceModel.class);
-//                    MySingleton.getInstance().addUrgence(urgence);
+                    EmergencyFirebaseModel urgence = dataSnapshot.getValue(EmergencyFirebaseModel.class);
+                    if(!urgence.getStatus().equals("close"))
+                    MySingleton.getInstance().addUrgence(new UrgenceModel(
+                            urgence.getPosition(),urgence.getDate(),urgence.getNiveauxDanger(),
+                            urgence.getDescription(),urgence.getPositionName(),urgence.getTitle(),urgence.getNombreBlesses(),
+                            urgence.getTakeBy(),urgence.getStatus(),urgence.getDevice()
+                    ));
                     System.out.println(dataSnapshot);
                 }
+                progressBarDataUser.setVisibility(View.INVISIBLE);
                 myCallback.onCallback(MySingleton.getInstance().getUrgenceArrayList());
             }
             @Override

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emergencysystem.Managers.CacheHelper;
 import com.example.emergencysystem.Models.Position;
 import com.example.emergencysystem.Models.RecycleClickListener;
 import com.example.emergencysystem.Models.UrgenceModel;
@@ -26,10 +27,11 @@ import java.util.ArrayList;
 public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapter.HolderUrgences> {
     ArrayList<UrgenceModel> data;
     RecycleClickListener recycleClickListener;
-
-    public ListUrgencesAdapter(ArrayList<UrgenceModel> data, RecycleClickListener recycleClickListener) {
+    String MyId;
+    public ListUrgencesAdapter(ArrayList<UrgenceModel> data, RecycleClickListener recycleClickListener,String MyId) {
         this.data = data;
         this.recycleClickListener = recycleClickListener;
+        this.MyId=MyId;
     }
 
     @NonNull
@@ -46,6 +48,19 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
         holder.EmergencyTitle.setText(data.get(position).getTitle());
         holder.palceEmergencyName.setText(data.get(position).getPositionName());
         holder.InjuredNumber.setText(data.get(position).getNombreBlesses()+"");
+
+        if(data.get(position).getStatus().equals("open")) {
+            holder.status.setVisibility(View.INVISIBLE);
+            //holder.status.setText(data.get(position).getDevice());
+            holder.status2.setVisibility(View.VISIBLE);
+        }else{
+            holder.status.setVisibility(View.VISIBLE);
+            holder.status2.setVisibility(View.INVISIBLE);
+            if(data.get(position).getTakeBy().equals(MyId))
+                holder.status.setText("Taken By Me");
+            else
+                holder.status.setText("Taken By Other");
+        }
 
         if(data.get(position).getNiveauxDanger()==3) {
             //holder.imageDangerLevel.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.redColor)));
@@ -72,7 +87,7 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
     }
 
     public class HolderUrgences extends RecyclerView.ViewHolder {
-        TextView EmergencyTitle,InjuredNumber,DescriptionEmergency,dateEmergency,palceEmergencyName;
+        TextView EmergencyTitle,InjuredNumber,DescriptionEmergency,dateEmergency,palceEmergencyName,status,status2;
         Position position;
         ImageButton imageDangerLevel1,imageDangerLevel2,imageDangerLevel3;
         public HolderUrgences(@NonNull View itemView) {
@@ -85,6 +100,8 @@ public class ListUrgencesAdapter extends RecyclerView.Adapter<ListUrgencesAdapte
             InjuredNumber = itemView.findViewById(R.id.InjuredNumber);
             EmergencyTitle = itemView.findViewById(R.id.EmergencyTitle);
             palceEmergencyName = itemView.findViewById(R.id.palceEmergencyName);
+            status = itemView.findViewById(R.id.status);
+            status2 = itemView.findViewById(R.id.status2);
             imageDangerLevel1 = itemView.findViewById(R.id.imageDangerLevel1);
             imageDangerLevel2 = itemView.findViewById(R.id.imageDangerLevel2);
             imageDangerLevel3 = itemView.findViewById(R.id.imageDangerLevel3);

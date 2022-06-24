@@ -131,4 +131,17 @@
         android:textSize="12sp"
         android:text="description description description description description description descrip description description description description description description description description description description description description description description description description description description description description description description description description description "
         />
+    <TextView
+        android:id="@+id/takeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorApp"
+        android:textAlignment="center"
+        android:text="SELECT POSITION"
+        android:textColor="@color/white"
+        android:padding="12dp"
+        android:clickable="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        />
 </LinearLayout>

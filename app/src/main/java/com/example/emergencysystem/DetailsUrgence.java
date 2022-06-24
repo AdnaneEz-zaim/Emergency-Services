@@ -37,6 +37,8 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +62,10 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
 
     //polyline object
     private List<Polyline> polylines = null;
+    TextView takeBtn;
 
     //ifos
-    String date,description,niveauxDanger,title,positionName,positionY,positionX,nombreBlesses;
+    String date,description,niveauxDanger,title,positionName,positionY,positionX,nombreBlesses,status,takeBy,myId,emergencyId;
     private String keyApiDerection="AIzaSyDQ2c_pOSOFYSjxGMwkFvCVWKjYOM9siow";
 
     @Override
@@ -79,7 +82,10 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
         positionX=getIntent().getStringExtra("positionX");
         nombreBlesses=getIntent().getStringExtra("nombreBlesses");
 
-        System.out.println("date"+description+" hada jabo");
+        status=getIntent().getStringExtra("status");
+        takeBy=getIntent().getStringExtra("takeBy");
+        myId=getIntent().getStringExtra("myId");
+        emergencyId=getIntent().getStringExtra("emergencyId");
 
         bottomDialog = findViewById(R.id.bottomDialog);
 
@@ -157,7 +163,6 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
 
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -165,7 +170,6 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
             getMyLocation();
         }
     }
-
 
     // function to find Routes.
     public void Findroutes(LatLng Start, LatLng End)
@@ -281,6 +285,7 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
         TextView EmergencyNumberInjured =bottomSheetDialog.findViewById(R.id.EmergencyNumberInjured);
         TextView EmergencyDescription =bottomSheetDialog.findViewById(R.id.EmergencyDescription);
         TextView EmergencyPositionName =bottomSheetDialog.findViewById(R.id.EmergencyPositionName);
+        takeBtn =bottomSheetDialog.findViewById(R.id.takeBtn);
 
         titleEmergency.setText(title);
         EmergencyDate.setText(date);
@@ -302,9 +307,51 @@ public class DetailsUrgence extends FragmentActivity implements OnMapReadyCallba
         EmergencyDescription.setText(description);
         EmergencyPositionName.setText(positionName);
 
+        traitmentClickBtn();
+
         bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bottomSheetDialog.show();
 
+    }
+
+    private void traitmentClickBtn() {
+        if(status.equals("open")){
+            takeBtn.setText("Take this Emergency");
+            takeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    status="inprogress";
+                    takeBy=myId;
+                    FirebaseDatabase database= FirebaseDatabase.getInstance();
+                    database.getReference().child("data").child(emergencyId).child("status").setValue("inprogress");
+                    database.getReference().child("data").child(emergencyId).child("takeBy").setValue(myId);
+                    traitmentClickBtn();
+                }
+            });
+        }else if(status.equals("inprogress")){
+            if(takeBy.equals(myId)){
+                takeBtn.setText("Close Emergency");
+                takeBtn.setBackgroundResource(R.color.greenColor);
+                takeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        status="close";
+                        FirebaseDatabase database= FirebaseDatabase.getInstance();
+                        database.getReference().child("data").child(emergencyId).child("status").setValue("close");
+                        traitmentClickBtn();
+                    }
+                });
+
+            }else {
+                takeBtn.setText("In Progress");
+                takeBtn.setTextColor(Color.GREEN);
+                takeBtn.setBackgroundResource(R.color.white);
+            }
+        }else{
+            takeBtn.setText("Closed");
+            takeBtn.setTextColor(Color.GREEN);
+            takeBtn.setBackgroundResource(R.color.white);
+        }
     }
 }
 

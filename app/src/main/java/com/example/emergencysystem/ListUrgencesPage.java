@@ -93,9 +93,8 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
 
         //list product traitmant
         recyclerViewUrgences = findViewById(R.id.listUrgences);
-
         linearLayoutManagerUrgences = new LinearLayoutManager(ListUrgencesPage.this,LinearLayoutManager.VERTICAL,false);
-        urgencesAdapter = new ListUrgencesAdapter(MySingleton.getInstance().getUrgenceArrayList(),this);
+        urgencesAdapter = new ListUrgencesAdapter(MySingleton.getInstance().getUrgenceArrayList(),this,sqlLiteCacheHelper.getUser().getId());
         recyclerViewUrgences.setLayoutManager(linearLayoutManagerUrgences);
         recyclerViewUrgences.setAdapter(urgencesAdapter);
     }
@@ -159,6 +158,10 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
             switchActivityIntent.putExtra("positionY", urgence.getPosition().getPositionY()+"");
             switchActivityIntent.putExtra("positionX", urgence.getPosition().getPositionX()+"");
             switchActivityIntent.putExtra("nombreBlesses", urgence.getNombreBlesses()+"");
+            switchActivityIntent.putExtra("status", urgence.getStatus()+"");
+            switchActivityIntent.putExtra("takeBy", urgence.getTakeBy()+"");
+            switchActivityIntent.putExtra("myId", sqlLiteCacheHelper.getUser().getId());
+            switchActivityIntent.putExtra("emergencyId", urgence.getId());
             startActivity(switchActivityIntent);
     }
 
@@ -168,7 +171,9 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
 
     public void getContactsFromFirebase(final UrgenceListCallback myCallback, FirebaseAuth auth) {
         creatDialogNoInternet();
-        database.getReference().child("data").orderByChild("Device").equalTo(sqlLiteCacheHelper.getUser().getRole().toString()).addValueEventListener(new ValueEventListener() {
+        database.getReference().child("data")
+                .orderByChild("Device").equalTo(sqlLiteCacheHelper.getUser().getRole().toString())
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 {
@@ -179,12 +184,16 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         System.out.println(dataSnapshot);
                         EmergencyFirebaseModel urgence = dataSnapshot.getValue(EmergencyFirebaseModel.class);
+                        if(!urgence.getStatus().equals("close"))
                         MySingleton.getInstance().addUrgence(new UrgenceModel(
+                                dataSnapshot.getKey(),
                                 urgence.getPosition(),urgence.getDate(),urgence.getNiveauxDanger(),
-                                urgence.getDescription(),urgence.getPositionName(),urgence.getTitle(),urgence.getNombreBlesses()
+                                urgence.getDescription(),urgence.getPositionName(),urgence.getTitle(),urgence.getNombreBlesses(),
+                                urgence.getTakeBy(),urgence.getStatus(),urgence.getDevice()
                         ));
-                        System.out.println("===> ha la positioon li jab "+urgence.getPosition().getPositionX());
                         System.out.println(dataSnapshot);
+                        System.out.println("ha data");
+                        System.out.println(dataSnapshot.getKey());
                     }
                     secondList = (ArrayList<UrgenceModel>) MySingleton.getInstance().getUrgenceArrayList().clone();
                     // Remove all elements in firstList from secondList
@@ -197,9 +206,14 @@ public class ListUrgencesPage extends AppCompatActivity implements RecycleClickL
                     if (secondList.size() > 1) {
                         creatNotification("New emergencies", "there are " + secondList.size() + " new emergencies");
                         notificationManagerCompat.notify(random, notification);
-                    } else if (secondList.size() == 1) {
-                        creatNotification(secondList.get(0).getTitle(), secondList.get(0).getPositionName());
-                        notificationManagerCompat.notify(random, notification);
+                    } else if (secondList.size() == 1 ) {
+                        if(!secondList.get(0).getTakeBy().equals(sqlLiteCacheHelper.getUser().getId())){
+                            creatNotification(secondList.get(0).getTitle(),"Taken by other user");
+                            notificationManagerCompat.notify(random, notification);
+                        }else if(secondList.get(0).getStatus().equals("open")){
+                            creatNotification(secondList.get(0).getTitle(), secondList.get(0).getPositionName());
+                            notificationManagerCompat.notify(random, notification);
+                        }
                     }
                 }
                 myCallback.onCallback(MySingleton.getInstance().getUrgenceArrayList());

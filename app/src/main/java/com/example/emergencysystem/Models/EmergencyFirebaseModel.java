@@ -10,11 +10,14 @@ public class EmergencyFirebaseModel {
     String positionName;
     String title;
     String description;
+    String takeBy;
+    String status;
+    String createBy;
 
     public EmergencyFirebaseModel() {
     }
 
-    public EmergencyFirebaseModel(String id, String device, String date, int niveauxDanger, int nombreBlesses, Position position, String positionName, String title, String description) {
+    public EmergencyFirebaseModel(String id, String device, String date, int niveauxDanger, int nombreBlesses, Position position, String positionName, String title, String description,String createBy) {
         this.id = id;
         Device = device;
         this.date = date;
@@ -24,9 +27,18 @@ public class EmergencyFirebaseModel {
         this.positionName = positionName;
         this.title = title;
         this.description = description;
+        this.createBy = createBy;
     }
 
-    public EmergencyFirebaseModel(String device, String date, int niveauxDanger, int nombreBlesses, Position position, String positionName, String title, String description) {
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public EmergencyFirebaseModel(String device, String date, int niveauxDanger, int nombreBlesses, Position position, String positionName, String title, String description, String takeBy, String status) {
         Device = device;
         this.date = date;
         this.niveauxDanger = niveauxDanger;
@@ -35,6 +47,24 @@ public class EmergencyFirebaseModel {
         this.positionName = positionName;
         this.title = title;
         this.description = description;
+        this.status = status;
+        this.takeBy =takeBy;
+    }
+
+    public String getTakeBy() {
+        return takeBy;
+    }
+
+    public void setTakeBy(String takeBy) {
+        this.takeBy = takeBy;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDescription() {

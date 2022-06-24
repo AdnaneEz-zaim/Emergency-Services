@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -21,6 +22,7 @@ public class VolleyUtils {
 
  public static void SendData(Map data, Context mContext){
         RequestQueue requstQueue = Volley.newRequestQueue((Context) mContext);
+
         JSONObject dataJson = new JSONObject(data);
 //        progressBar.setVisibility(View.VISIBLE);
         JsonObjectRequest jsonobj = new JsonObjectRequest(Request.Method.POST, "http://10.1.12.209:8000/predict",dataJson,
@@ -45,6 +47,10 @@ public class VolleyUtils {
                     }
                 }
         );
+     jsonobj.setRetryPolicy(new DefaultRetryPolicy(
+             0,
+             DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requstQueue.add(jsonobj);
     }
 }

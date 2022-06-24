@@ -57,7 +57,7 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
     Position position;
     List<Address> addresses = null;
     Address address;
-    String titreEmergency,description,dangerLevel,nbrInjured;
+    String titreEmergency,description,dangerLevel,nbrInjured,createBy;
 
     Button saveEMERGENCY;
     private LocationListener locationListener = new LocationListener() {
@@ -66,20 +66,14 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
             drawMarker(location, "I am here");
             locationManager.removeUpdates(locationListener);
         }
-
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
-
         }
-
         @Override
         public void onProviderEnabled(String s) {
-
         }
-
         @Override
         public void onProviderDisabled(String s) {
-
         }
     };
 
@@ -95,6 +89,9 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
         description = getIntent().getStringExtra("description");
         dangerLevel = getIntent().getStringExtra("dangerLevel");
         nbrInjured = getIntent().getStringExtra("nbrInjured");
+        createBy = getIntent().getStringExtra("createBy");
+
+        final boolean[] send = {true};
 
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -117,7 +114,7 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
                         danger=3;
                     //title ===> position title
                     String d = formatter.format(date).toString();
-                    UrgenceModel urgence = new UrgenceModel(position, d, danger, description, title, titreEmergency, Integer.parseInt(nbrInjured));
+                    UrgenceModel urgence = new UrgenceModel(position, d, danger, description, title, titreEmergency, Integer.parseInt(nbrInjured),"","open","");
                     MySingleton.getInstance().addUrgence(urgence);
                     Map<String, Object> map = new HashMap<>();
                     Map<String, Object> map1 = new HashMap<>();
@@ -130,11 +127,18 @@ public class PositionUrgence extends AppCompatActivity implements OnMapReadyCall
                     map.put("positionName",urgence.getPositionName());
                     map.put("title",urgence.getTitle());
                     map.put("nombreBlesses",urgence.getNombreBlesses());
+                    map.put("createBy",createBy);
+                    map.put("status","open");
+                    map.put("takeBy","");
+                    if(send[0]){
+                        VolleyUtils.SendData( map, getApplicationContext());
+                        send[0] = false;
+                    }
 
-                    VolleyUtils.SendData( map, getApplicationContext());
                     Intent switchToArView;
                     switchToArView = new Intent(PositionUrgence.this, UserListUrgencesActivity.class);
                     startActivity(switchToArView);
+                    finish();
                 }
             }
         });
